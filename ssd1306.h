@@ -30,8 +30,7 @@ SOFTWARE.
 
 #ifndef _inc_ssd1306
 #define _inc_ssd1306
-#include <pico/stdlib.h>
-#include <hardware/i2c.h>
+#include "platform/i2c.h"
 
 /**
 *	@brief defines commands used in ssd1306
@@ -60,14 +59,15 @@ typedef enum {
 *	@brief holds the configuration
 */
 typedef struct {
-    uint8_t width; 		/**< width of display */
-    uint8_t height; 	/**< height of display */
-    uint8_t pages;		/**< stores pages of display (calculated on initialization*/
-    uint8_t address; 	/**< i2c address of display*/
-    i2c_inst_t *i2c_i; 	/**< i2c connection instance */
-    bool external_vcc; 	/**< whether display uses external vcc */ 
-    uint8_t *buffer;	/**< display buffer */
-    size_t bufsize;		/**< buffer size */
+    uint8_t width; 		          /**< width of display */
+    uint8_t height; 	          /**< height of display */
+    uint8_t pages;		          /**< stores pages of display (calculated on initialization*/
+    uint8_t address; 	          /**< i2c address of display*/
+	mcu_i2c_bus_t* i2c_bus;		  /**< i2c bus */
+    mcu_i2c_bus_config_t i2c_cfg; /**< i2c config */
+    bool external_vcc; 	  		  /**< whether display uses external vcc */ 
+    uint8_t *buffer;	  		  /**< display buffer */
+    size_t bufsize;		  		  /**< buffer size */
 } ssd1306_t;
 
 /**
@@ -83,7 +83,7 @@ typedef struct {
 *	@retval true for Success
 *	@retval false if initialization failed
 */
-bool ssd1306_init(ssd1306_t *p, uint16_t width, uint16_t height, uint8_t address, i2c_inst_t *i2c_instance);
+bool ssd1306_init(ssd1306_t *p, uint16_t width, uint16_t height, uint8_t address, const mcu_i2c_bus_config_t *i2c_cfg);
 
 /**
 *	@brief deinitialize display

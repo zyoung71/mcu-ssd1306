@@ -1,0 +1,16 @@
+#ifndef MCU_PLATFORM_CONFIG_H
+#define MCU_PLATFORM_CONFIG_H
+
+#define MCU_PLATFORM_NAME "rp2040"
+
+#define MCU_NUM_GPIO 30
+#define MCU_NUM_SPI 2
+#define MCU_NUM_I2C 2
+#define MCU_NUM_UART 2
+#define MCU_NUM_ADC 4
+#define MCU_NUM_PWM_SLICES 8
+#define MCU_NUM_PWM_CHANNELS 16
+#define MCU_NUM_TIMERS 4
+#define MCU_NUM_PIO 2
+
+#endif
